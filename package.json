@@ -1,0 +1,17 @@
+{
+  "name": "todo-app-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node fuse.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fuse-box": "^3.7.1",
+    "terser": "^3.17.0",
+    "typescript": "^3.3.4000",
+    "uglify-js": "^3.5.2"
+  }
+}
