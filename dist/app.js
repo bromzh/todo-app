@@ -16,7 +16,7 @@ function main() {
         let newToDoLi = document.createElement(`li`); //Назначаем переменную для создания строк
         newToDoLi.innerHTML = doListArray[doListArrayCounter]; //Записываем в переменную строки содержимое элемента массива
         doList.appendChild(newToDoLi); //Добавляем в список строку с содержимым массива
-        doListArrayCounter++; //Увеличиваем счетчик массива на 1
+        doListArrayCounter++; //Увеличиваем счетчик массива на 1 для следующей записи
         /*console.log(doListArray);*/
     }
 }
