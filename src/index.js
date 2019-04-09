@@ -3,21 +3,25 @@ function main() {
 
     // Put your code below
 
-    //New quests adds to araray and goes to list
-    let doList, x, i;
-    doList = document.getElementById('doList');
-    x = [];
-    i = 0;
-    document.getElementById('addInput').onclick = addToList;
+
+    let doList = document.getElementById('doList');                //Записываем в переменную содержимое списка
+    let doListArray = [];                                                  //Создаем массив
+    let doListArrayCounter = 0;                                            //Выставляем значение счетчика на 0
+
+    document.getElementById('addInput').onclick = addToList;       //При клике на кнопку добавить вызывается функция добавления строки в список дел
 
     function addToList() {
-        let inputText = document.getElementById('input').value;
-        x.push(inputText);
-        doList.innerHTML += `<li>${x[i]}</li>`;
-        i++;
+        let inputText = document.getElementById('input').value;    //Создаем переменную и записываем туда содержимое строки ввода
+        doListArray.push(inputText);                                       //Добавляем в массив содержимое перемнной inputText
+        let newToDoLi = document.createElement(`li`);              //Назначаем переменную для создания строк
+        newToDoLi.innerHTML = doListArray[doListArrayCounter];               //Записываем в переменную строки содержимое элемента массива
+        doList.appendChild(newToDoLi);                                     //Добавляем в список строку с содержимым массива
 
-        // console.log(x);
+        doListArrayCounter++;                                              //Увеличиваем счетчик массива на 1
+
+        /*console.log(doListArray);*/
     }
 }
 
 main();
+
