@@ -16,11 +16,19 @@ function main() {
         doListArray.push(inputText);                                       //Добавляем в массив содержимое перемнной inputText
 
         let newToDoLi = document.createElement(`li`);              //Назначаем переменную для создания строк
-        newToDoLi.id = `line${doListArrayCounter}`
+        newToDoLi.id = `line${doListArrayCounter}`;
 
         newToDoLi.innerHTML = `<input id="checkBox${doListArrayCounter}" type="checkbox">
-            ${doListArray[doListArrayCounter]}<button id="deleteLine${doListArrayCounter}"
-            onclick="f1()">Удалить</button>`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
+            ${doListArray[doListArrayCounter]}`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
+
+        const button = document.createElement(`button`);
+
+        button.addEventListener(`click`, () => {                //Удаление элементов из списка вариант 1
+            newToDoLi.remove();
+        });
+        button.innerText = `x`;
+        newToDoLi.appendChild(button);
+
 
         doList.appendChild(newToDoLi);                                     //Добавляем в список строку с содержимым массива
 
@@ -32,11 +40,11 @@ function main() {
 
     }
 
-    //Удаление элементов из списка
-
-    function f1() {
-        alert(`Сдохни бля`);
-    }
+    //Удаление элементов из списка вариант 2
+    /*const button = document.createElement(`button`);
+    button.addEventListener(`click`, () => {
+        doList.removeChild(newToDoLi);
+    });*/
 
 }
 
