@@ -61,7 +61,7 @@ function main() {
 
     const removeCheckedButton = document.getElementById(`showActive`);
     removeCheckedButton.addEventListener('click', () => {
-        let counter = `0`;
+        let counter = 0;
         while (counter < doListArray.length) {
 
             let checkBox = document.getElementById(`checkBox${counter}`);
@@ -85,7 +85,7 @@ function main() {
     /*Фильтр Завершенные*/
     const showFinishedButton = document.getElementById(`showFinished`);
     showFinishedButton.addEventListener('click', () => {
-            let counter = `0`;
+        let counter = 0;
             while (counter < doListArray.length) {
 
                 let checkBox = document.getElementById(`checkBox${counter}`);
@@ -93,9 +93,7 @@ function main() {
                 if (checkBox == null) {
                 } else if (checkBox.checked == false) {
                     newToDoLi.style.display = `none`;
-                }
-
-                if (checkBox.checked == true) {
+                } else {
                     newToDoLi.style.display = `block`;
                 }
                 counter++;
@@ -109,10 +107,16 @@ function main() {
 
     const refreshFilterButton = document.getElementById(`refreshFilter`);
     refreshFilterButton.addEventListener('click', () => {
-            let counter = `0`;
+        let counter = 0;
+        let newToDoLi = document.getElementById(`line${counter}`);
+        let checkBox = document.getElementById(`checkBox${counter}`);
             while (counter < doListArray.length) {
                 let newToDoLi = document.getElementById(`line${counter}`);
-                newToDoLi.style.display = `block`;
+                if (newToDoLi == null) {
+                } else {
+                    newToDoLi.style.display = `block`;
+                }
+                ;
                 counter++;
             }
             ;
