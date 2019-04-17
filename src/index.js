@@ -9,6 +9,7 @@ function main() {
     let doListArray = [];                                                  //Создаем массив
     let doListArrayCounter = 0;                                            //Выставляем значение счетчика на 0
 
+
     document.getElementById('addInput').onclick = addToList;       //При клике на кнопку добавить вызывается функция добавления строки в список дел
 
     function addToList() {
@@ -21,13 +22,13 @@ function main() {
         newToDoLi.innerHTML = `<input id="checkBox${doListArrayCounter}" type="checkbox">
             ${doListArray[doListArrayCounter]}`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
 
-        const button = document.createElement(`button`);
+        const removeCurrentButton = document.createElement(`button`);
 
-        button.addEventListener(`click`, () => {                //Удаление элементов из списка вариант 1
+        removeCurrentButton.addEventListener(`click`, () => {                //Удаление элементов из списка вариант 1
             newToDoLi.remove();
         });
-        button.innerText = `x`;
-        newToDoLi.appendChild(button);
+        removeCurrentButton.innerText = `x`;
+        newToDoLi.appendChild(removeCurrentButton);
 
 
         doList.appendChild(newToDoLi);                                     //Добавляем в список строку с содержимым массива
@@ -39,6 +40,24 @@ function main() {
 
 
     }
+
+    const removeCheckedButton = document.getElementById(`removeChecked`);
+    removeCheckedButton.addEventListener('click', () => {
+        let counter = `0`;
+        while (counter < doListArray.length) {
+            console.log(counter);
+            let checkBox = document.getElementById(`checkBox${counter}`);
+            let newToDoLi = document.getElementById(`line${counter}`);
+            if (checkBox == null) {
+            } else if (checkBox.checked) {
+                newToDoLi.remove();
+            }
+            counter++;
+        }
+        ;
+        console.log(doListArray);
+
+    });
 
     //Удаление элементов из списка вариант 2
     /*const button = document.createElement(`button`);
