@@ -92,19 +92,15 @@ function main() {
                 let newToDoLi = document.getElementById(`line${counter}`);
                 if (checkBox == null) {
                 } else if (checkBox.checked == false) {
-
                     newToDoLi.style.display = `none`;
                 }
 
                 if (checkBox.checked == true) {
-
                     newToDoLi.style.display = `block`;
                 }
-
                 counter++;
             }
             ;
-
         }
     )
     ;
@@ -115,24 +111,14 @@ function main() {
     refreshFilterButton.addEventListener('click', () => {
             let counter = `0`;
             while (counter < doListArray.length) {
-
-
                 let newToDoLi = document.getElementById(`line${counter}`);
                 newToDoLi.style.display = `block`;
-
                 counter++;
             }
             ;
-
         }
     )
     ;
-//Удаление элементов из списка вариант 2
-    /*const button = document.createElement(`button`);
-    button.addEventListener(`click`, () => {
-        doList.removeChild(newToDoLi);
-    });*/
-
 }
 
 main();
