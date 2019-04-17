@@ -19,16 +19,30 @@ function main() {
         let newToDoLi = document.createElement(`li`);              //Назначаем переменную для создания строк
         newToDoLi.id = `line${doListArrayCounter}`;
 
-        newToDoLi.innerHTML = `<input id="checkBox${doListArrayCounter}" type="checkbox">
-            ${doListArray[doListArrayCounter]}`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
+        newToDoLi.innerHTML = `${doListArray[doListArrayCounter]}`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
 
-        const removeCurrentButton = document.createElement(`button`);
+        const checkBox = document.createElement(`input`);
+        checkBox.id = `checkBox${doListArrayCounter}`;
+        checkBox.type = `checkbox`;
+        checkBox.addEventListener(`change`, function () {
+                if (this.checked) {
+                    newToDoLi.style.textDecoration = `line-through`;
+                } else {
+                    newToDoLi.style.textDecoration = `none`;
+                }
+            }
+        );
+
+        newToDoLi.append(checkBox);
+
+
+        const removeCurrentButton = document.createElement(`button`); //Создание кнопки удаления
 
         removeCurrentButton.addEventListener(`click`, () => {                //Удаление элементов из списка вариант 1
             newToDoLi.remove();
         });
-        removeCurrentButton.innerText = `x`;
-        newToDoLi.appendChild(removeCurrentButton);
+        removeCurrentButton.innerText = `x`;                               //Крестик на кнопке удаления
+        newToDoLi.appendChild(removeCurrentButton);                        //Добавление кнопки удаления в строку
 
 
         doList.appendChild(newToDoLi);                                     //Добавляем в список строку с содержимым массива
@@ -40,6 +54,8 @@ function main() {
 
 
     }
+
+    /*Завершение отмеченных*/
 
     const removeCheckedButton = document.getElementById(`removeChecked`);
     removeCheckedButton.addEventListener('click', () => {
@@ -56,8 +72,10 @@ function main() {
         }
         ;
         console.log(doListArray);
-
     });
+
+    //Зачеркивание отмеченных
+
 
     //Удаление элементов из списка вариант 2
     /*const button = document.createElement(`button`);
