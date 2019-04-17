@@ -18,9 +18,11 @@ function main() {
 
         let newToDoLi = document.createElement(`li`);              //Назначаем переменную для создания строк
         newToDoLi.id = `line${doListArrayCounter}`;
+        newToDoLi.style.display = `block`;
 
         newToDoLi.innerHTML = `${doListArray[doListArrayCounter]}`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
 
+        //Зачеркивание отмеченных
         const checkBox = document.createElement(`input`);
         checkBox.id = `checkBox${doListArrayCounter}`;
         checkBox.type = `checkbox`;
@@ -33,7 +35,7 @@ function main() {
             }
         );
 
-        newToDoLi.append(checkBox);
+        newToDoLi.insertBefore(checkBox, newToDoLi.firstChild);
 
 
         const removeCurrentButton = document.createElement(`button`); //Создание кнопки удаления
@@ -55,29 +57,77 @@ function main() {
 
     }
 
-    /*Завершение отмеченных*/
+    /*Фильтр Активных*/
 
-    const removeCheckedButton = document.getElementById(`removeChecked`);
+    const removeCheckedButton = document.getElementById(`showActive`);
     removeCheckedButton.addEventListener('click', () => {
         let counter = `0`;
         while (counter < doListArray.length) {
-            console.log(counter);
+
             let checkBox = document.getElementById(`checkBox${counter}`);
             let newToDoLi = document.getElementById(`line${counter}`);
             if (checkBox == null) {
             } else if (checkBox.checked) {
-                newToDoLi.remove();
+
+                newToDoLi.style.display = `none`;
+            }
+            if (checkBox == null) {
+            } else if (checkBox.checked == false) {
+
+                newToDoLi.style.display = `block`;
             }
             counter++;
         }
         ;
-        console.log(doListArray);
+
     });
 
-    //Зачеркивание отмеченных
+    /*Фильтр Завершенные*/
+    const showFinishedButton = document.getElementById(`showFinished`);
+    showFinishedButton.addEventListener('click', () => {
+            let counter = `0`;
+            while (counter < doListArray.length) {
+
+                let checkBox = document.getElementById(`checkBox${counter}`);
+                let newToDoLi = document.getElementById(`line${counter}`);
+                if (checkBox == null) {
+                } else if (checkBox.checked == false) {
+
+                    newToDoLi.style.display = `none`;
+                }
+
+                if (checkBox.checked == true) {
+
+                    newToDoLi.style.display = `block`;
+                }
+
+                counter++;
+            }
+            ;
+
+        }
+    )
+    ;
+
+    //Сбросить фильтр
+
+    const refreshFilterButton = document.getElementById(`refreshFilter`);
+    refreshFilterButton.addEventListener('click', () => {
+            let counter = `0`;
+            while (counter < doListArray.length) {
 
 
-    //Удаление элементов из списка вариант 2
+                let newToDoLi = document.getElementById(`line${counter}`);
+                newToDoLi.style.display = `block`;
+
+                counter++;
+            }
+            ;
+
+        }
+    )
+    ;
+//Удаление элементов из списка вариант 2
     /*const button = document.createElement(`button`);
     button.addEventListener(`click`, () => {
         doList.removeChild(newToDoLi);
