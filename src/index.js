@@ -9,6 +9,7 @@ function main() {
     let doListArray = [];                                                  //Создаем массив
     let doListArrayCounter = 0;                                            //Выставляем значение счетчика на 0
 
+
     document.getElementById('addInput').onclick = addToList;       //При клике на кнопку добавить вызывается функция добавления строки в список дел
 
     function addToList() {
@@ -17,17 +18,33 @@ function main() {
 
         let newToDoLi = document.createElement(`li`);              //Назначаем переменную для создания строк
         newToDoLi.id = `line${doListArrayCounter}`;
+        newToDoLi.style.display = `block`;
 
-        newToDoLi.innerHTML = `<input id="checkBox${doListArrayCounter}" type="checkbox">
-            ${doListArray[doListArrayCounter]}`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
+        newToDoLi.innerHTML = `${doListArray[doListArrayCounter]}`;                           //Создаем чекбокс и записываем в переменную строки содержимое элемента массива
 
-        const button = document.createElement(`button`);
+        //Зачеркивание отмеченных
+        const checkBox = document.createElement(`input`);
+        checkBox.id = `checkBox${doListArrayCounter}`;
+        checkBox.type = `checkbox`;
+        checkBox.addEventListener(`change`, function () {
+                if (this.checked) {
+                    newToDoLi.style.textDecoration = `line-through`;
+                } else {
+                    newToDoLi.style.textDecoration = `none`;
+                }
+            }
+        );
 
-        button.addEventListener(`click`, () => {                //Удаление элементов из списка вариант 1
+        newToDoLi.insertBefore(checkBox, newToDoLi.firstChild);
+
+
+        const removeCurrentButton = document.createElement(`button`); //Создание кнопки удаления
+
+        removeCurrentButton.addEventListener(`click`, () => {                //Удаление элементов из списка вариант 1
             newToDoLi.remove();
         });
-        button.innerText = `x`;
-        newToDoLi.appendChild(button);
+        removeCurrentButton.innerText = `x`;                               //Крестик на кнопке удаления
+        newToDoLi.appendChild(removeCurrentButton);                        //Добавление кнопки удаления в строку
 
 
         doList.appendChild(newToDoLi);                                     //Добавляем в список строку с содержимым массива
@@ -40,12 +57,72 @@ function main() {
 
     }
 
-    //Удаление элементов из списка вариант 2
-    /*const button = document.createElement(`button`);
-    button.addEventListener(`click`, () => {
-        doList.removeChild(newToDoLi);
-    });*/
+    /*Фильтр Активных*/
 
+    const removeCheckedButton = document.getElementById(`showActive`);
+    removeCheckedButton.addEventListener('click', () => {
+        let counter = 0;
+        while (counter < doListArray.length) {
+
+            let checkBox = document.getElementById(`checkBox${counter}`);
+            let newToDoLi = document.getElementById(`line${counter}`);
+            if (checkBox == null) {
+            } else if (checkBox.checked) {
+
+                newToDoLi.style.display = `none`;
+            }
+            if (checkBox == null) {
+            } else if (checkBox.checked == false) {
+
+                newToDoLi.style.display = `block`;
+            }
+            counter++;
+        }
+        ;
+
+    });
+
+    /*Фильтр Завершенные*/
+    const showFinishedButton = document.getElementById(`showFinished`);
+    showFinishedButton.addEventListener('click', () => {
+        let counter = 0;
+            while (counter < doListArray.length) {
+
+                let checkBox = document.getElementById(`checkBox${counter}`);
+                let newToDoLi = document.getElementById(`line${counter}`);
+                if (checkBox == null) {
+                } else if (checkBox.checked == false) {
+                    newToDoLi.style.display = `none`;
+                } else {
+                    newToDoLi.style.display = `block`;
+                }
+                counter++;
+            }
+            ;
+        }
+    )
+    ;
+
+    //Сбросить фильтр
+
+    const refreshFilterButton = document.getElementById(`refreshFilter`);
+    refreshFilterButton.addEventListener('click', () => {
+        let counter = 0;
+        let newToDoLi = document.getElementById(`line${counter}`);
+        let checkBox = document.getElementById(`checkBox${counter}`);
+            while (counter < doListArray.length) {
+                let newToDoLi = document.getElementById(`line${counter}`);
+                if (newToDoLi == null) {
+                } else {
+                    newToDoLi.style.display = `block`;
+                }
+                ;
+                counter++;
+            }
+            ;
+        }
+    )
+    ;
 }
 
 main();
